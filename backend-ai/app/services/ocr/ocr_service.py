@@ -6,8 +6,8 @@ from typing import Optional
 
 import pytesseract
 from loguru import logger
-from pdf2image import convert_from_bytes
 from PIL import Image
+import fitz
 
 
 class OcrService:
@@ -54,14 +54,15 @@ class OcrService:
     def _extraer_de_pdf(self, pdf_bytes: bytes) -> str:
         """Convierte PDF a imágenes y aplica OCR a cada página."""
         logger.info("Convirtiendo PDF a imágenes para OCR...")
-        
-        # Convertir PDF a imágenes (300 DPI para mejor calidad)
-        imagenes = convert_from_bytes(
-            pdf_bytes,
-            dpi=300,
-            first_page=1,
-            last_page=10,  # Limitar a 10 páginas para no saturar memoria
-        )
+
+        documento = fitz.open(stream=pdf_bytes, filetype="pdf")
+        imagenes = []
+        try:
+            for pagina in documento[:10]:
+                pixmap = pagina.get_pixmap(matrix=fitz.Matrix(300 / 72, 300 / 72), alpha=False)
+                imagenes.append(Image.frombytes("RGB", [pixmap.width, pixmap.height], pixmap.samples))
+        finally:
+            documento.close()
         
         textos_paginas = []
         for i, imagen in enumerate(imagenes, 1):

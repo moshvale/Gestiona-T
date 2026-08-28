@@ -31,7 +31,12 @@ class Settings(BaseSettings):
     anonimizacion_confianza_minima: float = 0.85
     
     # CORS
-    cors_origins: List[str] = ["http://localhost:3007", "http://localhost:8087"]
+    cors_origins: List[str] = [
+        "http://localhost:3007",
+        "http://127.0.0.1:3007",
+        "http://10.15.0.59:3007",
+        "http://localhost:8087",
+    ]
     
     # Logging
     log_level: str = "INFO"
