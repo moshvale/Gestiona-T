@@ -1,0 +1,7 @@
+F:\codes\Gestiona T\docker\backend-ai
+F:\codes\Gestiona T\docker\backend-core
+F:\codes\Gestiona T\docker\frontend
+F:\codes\Gestiona T\docker\nginx
+F:\codes\Gestiona T\docker\postgres
+F:\codes\Gestiona T\docker\README.md
+F:\codes\Gestiona T\docker\nginx\ssl

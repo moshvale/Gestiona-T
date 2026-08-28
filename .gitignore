@@ -1,0 +1,176 @@
+# ========================================
+# SISTEMA OPERATIVO
+# ========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# ========================================
+# VARIABLES DE ENTORNO (CRÍTICO)
+# ========================================
+.env
+.env.local
+.env.production
+**/.env
+!**/.env.example
+
+# ========================================
+# NODE / FRONTEND
+# ========================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.next/
+out/
+build/
+dist/
+.npm
+.eslintcache
+.stylelintcache
+
+# ========================================
+# JAVA / SPRING BOOT
+# ========================================
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+hs_err_pid*
+
+# ========================================
+# PYTHON / FASTAPI
+# ========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ========================================
+# DOCKER
+# ========================================
+docker-compose.override.yml
+
+# ========================================
+# BASE DE DATOS
+# ========================================
+*.sql.bak
+*.dump
+postgres_data/
+
+# ========================================
+# MINIO
+# ========================================
+minio_data/
+
+# ========================================
+# LOGS
+# ========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ========================================
+# IDEs Y EDITORES
+# ========================================
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### Eclipse ###
+.classpath
+.project
+.settings/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### Sublime Text ###
+*.sublime-workspace
+*.sublime-project
+
+# ========================================
+# TESTS Y COBERTURA
+# ========================================
+coverage/
+*.lcov
+.nyc_output
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# ========================================
+# MODELOS DE ML (MUY PESADOS)
+# ========================================
+backend-ai/app/ml/models/*.pkl
+backend-ai/app/ml/models/*.pt
+backend-ai/app/ml/models/*.onnx
+!backend-ai/app/ml/models/.gitkeep
+
+# ========================================
+# DOCUMENTOS TEMPORALES
+# ========================================
+*.tmp
+*.temp
+uploads/
+temp/
+
+# ========================================
+# SECRETS Y CREDENCIALES
+# ========================================
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+secrets/
+credentials/
+
+# ========================================
+# MACROS Y BACKUPS
+# ========================================
+*.bak
+*.backup
+*.old

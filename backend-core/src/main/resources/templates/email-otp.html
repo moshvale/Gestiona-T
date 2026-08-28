@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código de Verificación - Gestiona-T</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Inter', 'Segoe UI', Arial, sans-serif; background-color: #f7f8fa;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f7f8fa; padding: 40px 20px;">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(42, 47, 54, 0.08);">
+                    
+                    <!-- Encabezado con color institucional -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #e05578 0%, #c73a5e 100%); padding: 30px; text-align: center;">
+                            <h1 style="margin: 0; color: #ffffff; font-family: 'Montserrat', Arial, sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">
+                                Gestiona-T
+                            </h1>
+                            <p style="margin: 8px 0 0 0; color: #fce7eb; font-size: 14px;">
+                                Instituto Nacional Electoral
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Contenido -->
+                    <tr>
+                        <td style="padding: 40px 40px 30px 40px;">
+                            <h2 style="margin: 0 0 16px 0; color: #2a2f36; font-family: 'Montserrat', Arial, sans-serif; font-size: 22px; font-weight: 600;">
+                                Verificación de Identidad
+                            </h2>
+                            
+                            <p style="margin: 0 0 16px 0; color: #5f6774; font-size: 15px; line-height: 1.6;">
+                                Hola <strong th:text="${nombre}">Aspirante</strong>,
+                            </p>
+                            
+                            <p style="margin: 0 0 24px 0; color: #5f6774; font-size: 15px; line-height: 1.6;">
+                                Hemos recibido una solicitud para verificar tu identidad en la plataforma 
+                                <strong>Gestiona-T</strong>. Utiliza el siguiente código de 6 dígitos para completar el proceso:
+                            </p>
+                            
+                            <!-- Código OTP destacado -->
+                            <table width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center" style="padding: 24px 0;">
+                                        <div style="display: inline-block; background-color: #fce7eb; border: 2px dashed #e05578; border-radius: 12px; padding: 20px 40px;">
+                                            <span th:text="${codigoOtp}" 
+                                                  style="font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 36px; font-weight: 700; color: #a72d4d; letter-spacing: 8px;">
+                                                000000
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Información de expiración -->
+                            <p style="margin: 0 0 24px 0; color: #7d8694; font-size: 14px; line-height: 1.6; text-align: center;">
+                                ⏱️ Este código expira en <strong style="color: #a72d4d;" th:text="${minutosExpiracion} + ' minutos'">5 minutos</strong>.
+                            </p>
+                            
+                            <!-- Advertencia de seguridad -->
+                            <div style="background-color: #f7f8fa; border-left: 3px solid #dfe3e8; padding: 16px; border-radius: 6px; margin: 24px 0;">
+                                <p style="margin: 0; color: #5f6774; font-size: 13px; line-height: 1.5;">
+                                    🔒 <strong>Importante:</strong> Si no solicitaste este código, puedes ignorar este correo de forma segura. 
+                                    Nunca compartas este código con nadie, incluyendo personal del INE.
+                                </p>
+                            </div>
+                            
+                            <p style="margin: 24px 0 0 0; color: #5f6774; font-size: 14px; line-height: 1.6;">
+                                Saludos cordiales,<br>
+                                <strong style="color: #2a2f36;">Equipo de Gestiona-T</strong><br>
+                                <span style="color: #7d8694; font-size: 13px;">Instituto Nacional Electoral</span>
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Pie de página -->
+                    <tr>
+                        <td style="background-color: #f7f8fa; padding: 20px 40px; text-align: center; border-top: 1px solid #dfe3e8;">
+                            <p style="margin: 0; color: #7d8694; font-size: 12px; line-height: 1.5;">
+                                Este es un correo automático, por favor no respondas a este mensaje.<br>
+                                © 2026 Instituto Nacional Electoral. Todos los derechos reservados.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,193 @@
+spring:
+  application:
+    name: gestiona-t-backend-core
+
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+  
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5439}/${DB_NAME:gestiona_t}
+    username: ${DB_USER:gestiona_user}
+    password: ${DB_PASSWORD:GestionaT_2026_Secure}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+
+server:
+  port: ${SERVER_PORT:8087}
+
+# JWT
+jwt:
+  secret: ${JWT_SECRET:gestionat_ine_2026_super_secret_key_min_256_bits_change_in_production}
+  expiration:
+    ms: ${JWT_EXPIRATION_MS:3600000}
+  refresh:
+    expiration:
+      ms: ${JWT_REFRESH_EXPIRATION_MS:604800000}
+
+# MinIO
+minio:
+  endpoint: ${MINIO_ENDPOINT:http://localhost:9007}
+  access:
+    key: ${MINIO_ACCESS_KEY:minioadmin}
+  secret:
+    key: ${MINIO_SECRET_KEY:MinioAdmin_2026_Secure}
+  bucket:
+    cv: ${MINIO_BUCKET_CV:cv-documentos}
+    documentos: ${MINIO_BUCKET_DOCUMENTOS:documentos}
+    cartas: ${MINIO_BUCKET_CARTAS:cartas-declaratorias}
+    firmas: ${MINIO_BUCKET_FIRMAS:documentos-firmados}
+
+# Backend AI
+ai:
+  service:
+    url: ${AI_SERVICE_URL:http://localhost:8007/api/v1}
+
+# APIs Externas - RENAPO
+renapo:
+  api:
+    url: ${RENAPO_API_URL:https://api.renapo.gob.mx/v1}
+    key: ${RENAPO_API_KEY:SANDBOX_KEY}
+    secret: ${RENAPO_API_SECRET:SANDBOX_SECRET}
+
+# APIs Externas - RNP
+rnp:
+  api:
+    url: ${RNP_API_URL:https://api.rnp.sep.gob.mx/v1}
+    key: ${RNP_API_KEY:SANDBOX_KEY}
+
+# APIs Externas - SAT
+sat:
+  api:
+    url: ${SAT_API_URL:https://api.sat.gob.mx/v1}
+    key: ${SAT_API_KEY:SANDBOX_KEY}
+  fiel:
+    api:
+      url: ${SAT_FIEL_API_URL:https://api.sat.gob.mx/fiel/v1}
+      key: ${SAT_API_KEY:SANDBOX_KEY}
+
+# APIs Externas - SFP
+sfp:
+  api:
+    url: ${SFP_API_URL:https://api.sfp.gob.mx/v1}
+    key: ${SFP_API_KEY:SANDBOX_KEY}
+
+# APIs Externas - INE Lista Nominal
+ine:
+  lista:
+    nominal:
+      url: ${INE_LISTA_NOMINAL_URL:https://api.ine.mx/lista-nominal/v1}
+  api:
+    key: ${INE_API_KEY:SANDBOX_KEY}
+
+# APIs Externas - IMSS
+imss:
+  api:
+    url: ${IMSS_API_URL:https://api.imss.gob.mx/v1}
+    key: ${IMSS_API_KEY:SANDBOX_KEY}
+
+# APIs Externas - RENADEA
+renadea:
+  api:
+    url: ${RENADEA_API_URL:https://api.consejojudicial.gob.mx/renadea/v1}
+    key: ${RENADEA_API_KEY:SANDBOX_KEY}
+
+# APIs Externas - Violencia
+violencia:
+  api:
+    url: ${VIOLENCIA_API_URL:https://api.segob.gob.mx/violencia/v1}
+    key: ${VIOLENCIA_API_KEY:SANDBOX_KEY}
+
+# Timestamp Authority
+tsa:
+  url: ${TSA_URL:https://tsa.ine.mx/rfc3161}
+  username: ${TSA_USERNAME:tsa_user}
+  password: ${TSA_PASSWORD:tsa_password}
+
+# Biometría
+biometria:
+  api:
+    url: ${BIOMETRIA_API_URL:https://api.renapo.gob.mx/biometria/v1}
+    key: ${BIOMETRIA_API_KEY:SANDBOX_KEY}
+  threshold: ${BIOMETRIA_THRESHOLD:0.85}
+
+# OTP
+otp:
+  length: ${OTP_LENGTH:6}
+  expiration:
+    minutes: ${OTP_EXPIRATION_MINUTES:5}
+  email:
+    enabled: ${OTP_EMAIL_ENABLED:false}
+
+# CORS
+cors:
+  allowed:
+    # Original default included local network IPs for dev (commented out):
+    # http://10.15.0.59:3007, http://10.15.0.59:8087
+    origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3007,http://127.0.0.1:3007,http://localhost:8087}
+
+# Auditoría
+audit:
+  log:
+    retention:
+      days: ${AUDIT_LOG_RETENTION_DAYS:3650}
+  hash:
+    chain:
+      enabled: ${AUDIT_HASH_CHAIN_ENABLED:true}
+  blockchain:
+    enabled: ${AUDIT_BLOCKCHAIN_ENABLED:false}
+  async:
+    pool:
+      size: ${AUDIT_ASYNC_POOL_SIZE:10}
+    queue:
+      capacity: ${AUDIT_ASYNC_QUEUE_CAPACITY:1000}
+
+# Logging
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+    mx.ine.gestiona_t: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+  health:
+    mail:
+      enabled: false
+# Swagger/OpenAPI Configuration
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  default-produces-media-type: application/json

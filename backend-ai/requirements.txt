@@ -1,0 +1,38 @@
+# ========================================
+# Backend-AI Gestiona-T - Dependencies
+# Compatible con Python 3.12
+# ========================================
+
+# Web Framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.0
+python-multipart==0.0.19
+
+# NLP
+spacy==3.8.3
+transformers==4.47.1
+sentence-transformers==3.3.1
+
+# ML / Scientific
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1+cpu
+scikit-learn==1.6.0
+numpy<2
+scipy==1.14.1
+pandas==2.2.3
+
+# Utilities
+python-dotenv==1.0.1
+loguru==0.7.3
+
+# Testing
+pytest==8.3.4
+pytest-asyncio==0.24.0
+httpx==0.28.1
+
+# OCR
+pytesseract==0.3.10
+pdf2image==1.16.3
+Pillow==10.1.0

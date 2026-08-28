@@ -1,0 +1,83 @@
+services:
+  # ==========================================================
+  # POSTGRESQL 16 - Base de Datos Transaccional
+  # ==========================================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: gestiona-t-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gestiona_t
+      POSTGRES_USER: gestiona_user
+      POSTGRES_PASSWORD: GestionaT_2026_Secure
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    ports:
+      - "5439:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/postgres/init:/docker-entrypoint-initdb.d
+    networks:
+      - gestiona-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gestiona_user -d gestiona_t"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ==========================================================
+  # MINIO - Almacenamiento de Objetos (Tipo S3)
+  # ==========================================================
+  minio:
+    image: minio/minio:latest
+    container_name: gestiona-t-minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: MinioAdmin_2026_Secure
+    ports:
+      - "9007:9000"
+      - "9008:9001"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - gestiona-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # ==========================================================
+  # MINIO CLIENT - Crear buckets automáticamente
+  # ==========================================================
+  minio-init:
+    image: minio/mc:latest
+    container_name: gestiona-t-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      sleep 10;
+      /usr/bin/mc alias set gestiona http://minio:9000 minioadmin MinioAdmin_2026_Secure;
+      /usr/bin/mc mb --ignore-existing gestiona/cv-documentos;
+      /usr/bin/mc mb --ignore-existing gestiona/documentos;
+      /usr/bin/mc mb --ignore-existing gestiona/cartas-declaratorias;
+      /usr/bin/mc mb --ignore-existing gestiona/documentos-firmados;
+      echo 'Buckets creados exitosamente';
+      exit 0;
+      "
+    networks:
+      - gestiona-network
+
+volumes:
+  postgres_data:
+    driver: local
+  minio_data:
+    driver: local
+
+networks:
+  gestiona-network:
+    driver: bridge
+    name: gestiona-t-network

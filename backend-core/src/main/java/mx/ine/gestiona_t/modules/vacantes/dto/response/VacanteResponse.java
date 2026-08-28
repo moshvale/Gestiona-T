@@ -1,0 +1,40 @@
+package mx.ine.gestiona_t.modules.vacantes.dto.response;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+
+public record VacanteResponse(
+    UUID id,
+    String puesto,
+    String numeroPlaza,
+    String nivelTabular,
+    Integer numeroVacantes,
+    String descripcionFunciones,
+    String escolaridad,
+    String experiencia,
+    String conocimientos,
+    String habilidades,
+    String actitudes,
+    BigDecimal percepcionBruta,
+    BigDecimal percepcionNeta,
+    String ciudadPlaza,
+    String ubicacionPlaza,
+    String lugarRecepcionDocumentos,
+    LocalDate fechaExpedicion,
+    LocalDate fechaInicio,
+    LocalDate fechaLimite,
+    String horarioAtencion,
+    String personaResponsable,
+    String faseConcurso,
+    String notaImportante,
+    List<String> requisitos,
+    List<String> documentacionRequerida,
+    UUID creadaPor,
+    Boolean activa,
+    LocalDateTime createdAt,
+    LocalDateTime updatedAt,
+    boolean vigente
+) {}
